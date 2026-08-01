@@ -33,6 +33,8 @@ import os
 
 database_url = os.getenv("MYSQL_URL")
 
+print("MYSQL_URL =", database_url)
+
 if database_url:
     database_url = database_url.replace(
         "mysql://",
