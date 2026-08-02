@@ -160,9 +160,7 @@ def logout():
 # ==========================
 @app.route("/update")
 def update_data():
-    if "admin" not in session:
 
-        return redirect(url_for("login"))
 
     daftar_gempa = get_gempa()
 
@@ -195,9 +193,6 @@ def update_data():
 # ==========================
 @app.route("/delete/<int:id>")
 def delete_data(id):
-    if "admin" not in session:
-    
-            return redirect(url_for("login"))
 
     data = Gempa.query.get_or_404(id)
 
@@ -211,10 +206,7 @@ def delete_data(id):
 # ==========================
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit_data(id):
-    if "admin" not in session:
-    
-            return redirect(url_for("login"))
-
+   
     gempa = Gempa.query.get_or_404(id)
 
     if request.method == "POST":
@@ -241,9 +233,7 @@ def edit_data(id):
 # ==========================
 @app.route("/history")
 def history():
-    if "admin" not in session:
-    
-            return redirect(url_for("login"))
+   
 
     data = Gempa.query.order_by(Gempa.id.desc()).all()
 
@@ -258,9 +248,7 @@ def history():
 # ==========================
 @app.route("/chart-data")
 def chart_data():
-    if "admin" not in session:
-    
-            return redirect(url_for("login"))
+   
 
     data = Gempa.query.order_by(Gempa.id.asc()).all()
 
@@ -276,10 +264,7 @@ def chart_data():
 
 @app.route("/chart-bps")
 def chart_bps():
-    if "admin" not in session:
     
-            return redirect(url_for("login"))
-
     data = StatistikBPS.query.order_by(StatistikBPS.kepadatan.desc()).all()
 
     hasil = []
@@ -295,10 +280,7 @@ def chart_bps():
 
 @app.route("/map-data")
 def map_data():
-    if "admin" not in session:
-    
-            return redirect(url_for("login"))
-
+   
     data = Gempa.query.all()
 
     hasil = []
@@ -319,9 +301,7 @@ def map_data():
 
 @app.route("/statistik")
 def statistik():
-    if "admin" not in session:
     
-            return redirect(url_for("login"))
 
     data = Gempa.query.order_by(Gempa.id.desc()).all()
 
@@ -351,9 +331,7 @@ def statistik():
     )
 @app.route("/analisis")
 def analisis():
-    if "admin" not in session:
-    
-            return redirect(url_for("login"))
+   
 
     total_gempa = Gempa.query.count()
 
@@ -390,9 +368,7 @@ def analisis():
 
 @app.route("/export/pdf")
 def export_pdf():
-    if "admin" not in session:
-
-        return redirect(url_for("login"))
+    
 
     data = Gempa.query.order_by(Gempa.id.desc()).all()
 
@@ -453,9 +429,6 @@ def export_pdf():
 @app.route("/export/excel")
 def export_excel():
 
-    # Proteksi Login
-    if "admin" not in session:
-        return redirect(url_for("login"))
 
     data = Gempa.query.all()
 
@@ -509,10 +482,7 @@ def export_excel():
 
 @app.route("/import-bps", methods=["GET", "POST"])
 def import_bps():
-    if "admin" not in session:
-    
-            return redirect(url_for("login"))
-
+   
     if request.method == "POST":
 
         file = request.files["file"]
