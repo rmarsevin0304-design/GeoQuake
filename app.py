@@ -42,6 +42,14 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("MYSQL_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
+with app.app_context():
+    try:
+        print("DATABASE =", app.config["SQLALCHEMY_DATABASE_URI"])
+        print("GEMPA =", Gempa.query.count())
+        print("BPS =", StatistikBPS.query.count())
+        print("ADMIN =", Admin.query.count())
+    except Exception as e:
+        print("ERROR =", e)
 
 with app.app_context():
     db.create_all()
