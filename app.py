@@ -42,6 +42,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("MYSQL_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
+print("TES RAILWAY BERHASIL")
 with app.app_context():
     try:
         print("DATABASE =", app.config["SQLALCHEMY_DATABASE_URI"])
