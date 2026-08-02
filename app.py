@@ -38,7 +38,7 @@ DATABASE_URL = os.getenv(
     "mysql+pymysql://root:IkYGxVgTdKzhUpdouQLJsYPseIheDHbg@mysql.railway.internal:3306/railway"
 )
 
-app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("MYSQL_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
