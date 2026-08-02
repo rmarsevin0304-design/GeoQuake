@@ -34,14 +34,10 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Ambil URL dari Railway
-DATABASE_URL = os.getenv("MYSQL_URL")
-
-# Jika dijalankan secara lokal, gunakan SQLite
-if DATABASE_URL is None:
-    DATABASE_URL = (
-        "sqlite:///" + os.path.join(BASE_DIR, "geoquake.db")
-    )
-
+DATABASE_URL = (
+    "mysql+pymysql://root:IkYGxVgTdKzhUpdouQLJsYPseIheDHbg"
+    "@altaria.proxy.rlwy.net:29438/railway"
+)
 # Jika URL masih menggunakan mysql://, ubah menjadi mysql+pymysql://
 if DATABASE_URL.startswith("mysql://"):
     DATABASE_URL = DATABASE_URL.replace(
