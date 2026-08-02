@@ -32,6 +32,9 @@ app.secret_key = "geoquake123"
 import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+print("BASE_DIR =", BASE_DIR)
+print("DB EXISTS =", os.path.exists(os.path.join(BASE_DIR, "geoquake.db")))
+print("DB PATH =", os.path.join(BASE_DIR, "geoquake.db"))
 
 app.config["SQLALCHEMY_DATABASE_URI"] = \
     "sqlite:///" + os.path.join(BASE_DIR, "geoquake.db")
@@ -39,9 +42,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = \
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
-
-with app.app_context():
-    db.create_all()
 
 with app.app_context():
     db.create_all()
