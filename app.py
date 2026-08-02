@@ -33,24 +33,12 @@ import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "mysql+pymysql://root:IkYGxVgTdKzhUpdouQLJsYPseIheDHbg@mysql.railway.internal:3306/railway"
-)
+DATABASE_URL = os.getenv("MYSQL_URL")
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("MYSQL_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
-print("TES RAILWAY BERHASIL")
-with app.app_context():
-    try:
-        print("DATABASE =", app.config["SQLALCHEMY_DATABASE_URI"])
-        print("GEMPA =", Gempa.query.count())
-        print("BPS =", StatistikBPS.query.count())
-        print("ADMIN =", Admin.query.count())
-    except Exception as e:
-        print("ERROR =", e)
 
 with app.app_context():
     db.create_all()
