@@ -46,12 +46,10 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-with app.app_context():
-    db.create_all()
+    print("DATABASE =", app.config["SQLALCHEMY_DATABASE_URI"])
+    print("ADMIN =", Admin.query.count())
 
-    admin = Admin.query.filter_by(
-        username="admin"
-    ).first()
+    admin = Admin.query.filter_by(username="admin").first()
 
     if not admin:
         admin = Admin(
@@ -61,6 +59,8 @@ with app.app_context():
 
         db.session.add(admin)
         db.session.commit()
+
+    print("ADMIN SETELAH INSERT =", Admin.query.count())
 
 # ==========================
 # DASHBOARD
