@@ -10,7 +10,7 @@ __pycache__/
 .vscode/
 
 # Database lokal (jika ada)
-*.db
+# *.db
 
 # Log
 *.log
