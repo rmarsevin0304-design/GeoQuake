@@ -33,13 +33,29 @@ import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
+# Ambil URL dari Railway
 DATABASE_URL = os.getenv("MYSQL_URL")
+
+# Jika dijalankan secara lokal, gunakan SQLite
+if DATABASE_URL is None:
+    DATABASE_URL = (
+        "sqlite:///" + os.path.join(BASE_DIR, "geoquake.db")
+    )
+
+# Jika URL masih menggunakan mysql://, ubah menjadi mysql+pymysql://
+if DATABASE_URL.startswith("mysql://"):
+    DATABASE_URL = DATABASE_URL.replace(
+        "mysql://",
+        "mysql+pymysql://",
+        1
+    )
 
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
-
+print("MYSQL_URL =", os.getenv("MYSQL_URL"))
+print("DATABASE =", app.config["SQLALCHEMY_DATABASE_URI"])
 with app.app_context():
     db.create_all()
 
